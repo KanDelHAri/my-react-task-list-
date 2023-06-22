@@ -6,26 +6,27 @@ import Todo from "./components/Todo.jsx";
 import Updateform from "./components/Updateform.jsx";
 
 import "./App.css";
+import { useEffect } from "react";
 
 function App() {
   // estado de la lista de tareas
-  const [toDo, setToDo] = useState([]);
+  const [toDo, setToDo] = useState([{ id: 1, title: "Task 1", status: false }]);
   // estados de nueva tarea y tarea editada
   const [newTask, setNewTask] = useState("");
   const [updateData, setUpdateData] = useState("");
   // funciones de nuestra app
+
   const addTask = () => {
     if (newTask) {
-      let num = toDo.length + 1;
+      let tasks = [...toDo];
+      let num = tasks.length + 1;
       let newEntry = { id: num, title: newTask, status: false };
-      setToDo([...toDo, newEntry]);
-      setNewTask("");
-    }
-  };
+      let taskess = [...tasks, newEntry];
+      setToDo(taskess);
 
-  const deleteTask = (id) => {
-    let newList = toDo.filter((task) => task.id !== id);
-    setToDo(newList);
+      localStorage.setItem("taskess", JSON.stringify(taskess));
+      console.log(taskess);
+    }
   };
 
   const markDone = (id) => {
@@ -36,6 +37,16 @@ function App() {
       return task;
     });
     setToDo(newTask);
+    localStorage.setItem("taskess", JSON.stringify(newTask));
+    console.log(newTask);
+  };
+
+  const deleteTask = (id) => {
+    let newList = toDo.filter((task) => task.id !== id);
+    let neww = [...newList];
+    setToDo(neww);
+    localStorage.setItem("taskess", JSON.stringify(neww));
+    console.log(neww);
   };
 
   const cancelUpdate = () => {
@@ -48,7 +59,10 @@ function App() {
       title: e.target.value,
       status: updateData.status ? true : false,
     };
+
     setUpdateData(newEntry);
+    localStorage.setItem("taskess", JSON.stringify(newEntry));
+    console.log(newEntry);
   };
 
   const updateTask = () => {
@@ -56,7 +70,16 @@ function App() {
     let updateObject = [...filterRecords, updateData];
     setToDo(updateObject);
     setUpdateData("");
+
+    localStorage.setItem("taskess", JSON.stringify(updateObject));
+    console.log(updateObject);
   };
+
+  useEffect(() => {
+    const localdata = localStorage.getItem("taskess");
+    const datadata = JSON.parse(localdata);
+    setToDo(datadata);
+  }, []);
 
   return (
     <div className="container app">
@@ -79,7 +102,7 @@ function App() {
         />
       )}
 
-      {toDo && toDo.length ? "" : "No tasks..."}
+      {toDo.length ? "" : "No tasks..."}
       <Todo
         toDo={toDo}
         markDone={markDone}

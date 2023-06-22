@@ -21,7 +21,7 @@ export const Todo = ({ toDo, markDone, setUpdateData, deleteTask }) => {
                     <span className="tasktext">{task.title}</span>
                   </div>
                   <div className="icons">
-                    <span onClick={(e) => markDone(task.id)}>
+                    <span onClick={() => markDone(task.id)}>
                       <FontAwesomeIcon icon={faCircleCheck} />
                     </span>
                     <span
