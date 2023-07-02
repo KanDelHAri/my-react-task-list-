@@ -6,7 +6,7 @@ import {
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-export const Todo = ({ toDo, markDone, setUpdateData, deleteTask }) => {
+export const Todo = ({ toDo, markDone, esto, deleteTask }) => {
   return (
     <div>
       {toDo &&
@@ -24,15 +24,7 @@ export const Todo = ({ toDo, markDone, setUpdateData, deleteTask }) => {
                     <span onClick={() => markDone(task.id)}>
                       <FontAwesomeIcon icon={faCircleCheck} />
                     </span>
-                    <span
-                      onClick={() =>
-                        setUpdateData({
-                          id: task.id,
-                          title: task.title,
-                          status: task.status ? true : false,
-                        })
-                      }
-                    >
+                    <span onClick={() => esto(task)}>
                       <FontAwesomeIcon icon={faPen} />
                     </span>
                     <span onClick={() => deleteTask(task.id)}>

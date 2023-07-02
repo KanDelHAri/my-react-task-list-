@@ -17,7 +17,10 @@ export const Updateform = ({
           ></input>
         </div>
         <div className="col-auto">
-          <button onClick={updateTask} className="btn btn-lg btn-success mr-20">
+          <button
+            onClick={() => updateTask(updateData.id)}
+            className="btn btn-lg btn-success mr-20"
+          >
             Add Task
           </button>
           <button onClick={cancelUpdate} className="btn btn-lg btn-warning">

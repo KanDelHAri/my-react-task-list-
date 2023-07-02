@@ -1,12 +1,12 @@
 import React from "react";
 
-export const Addtaskform = ({ addTask, setNewTask, newTask }) => {
+export const Addtaskform = ({ addTask, valorr, newTask }) => {
   return (
     <div className="row">
       <div className="col">
         <input
           value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
+          onChange={valorr}
           className="form-control form-control-lg"
         ></input>
       </div>
