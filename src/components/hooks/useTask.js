@@ -12,6 +12,7 @@ export const useTask = () => {
       let newEntry = { id: num, title: newTask, status: false };
       let tareas = [...tasks, newEntry];
       setToDo(tareas);
+      setNewTask("")
 
       localStorage.setItem("tareas", JSON.stringify(tareas));
       console.log(tareas);
